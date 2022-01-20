@@ -1,20 +1,10 @@
 setImmediate(function() {
     Java.perform(function(){
-        Interceptor.attach(Module.findExportByName("/lib/arm64-v8a/libnative-lib", "open"), {
-            onEnter: function(args) {
-              this.flag = false;
-              var filename = Memory.readCString(ptr(args[0]));
-              console.log('filename =', filename)
-              if (filename.endsWith(".xml")) {
-                this.flag = true;
-                var backtrace = Thread.backtrace(this.context, Backtracer.ACCURATE).map(DebugSymbol.fromAddress).join("\n\t");
-                console.log("file name [ " + Memory.readCString(ptr(args[0])) + " ]\nBacktrace:" + backtrace);
-              }
-            },
-            onLeave: function(retval) {
-              if (this.flag) // passed from onEnter
-                console.warn("\nretval: " + retval);
-            }
-          });
+      var bypass = Java.use("kotlin.jvm.internal.Intrinsics");
+      var main = Java.use("com.eqst.lms.base12.SplashActivity");
+      bypass.areEqual.overload("java.lang.Object","java.lang.Object").implementation = function(arg1,arg2) {
+        console.log("파라미터1 전달값 : " + arg1,"파라미터 2 전달값 : " +arg2);
+        return true;
+      }
     })
 })
