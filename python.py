@@ -3,26 +3,20 @@ import sys
 
 
 def on_message(message, data):
-    if message['type'] == 'send':
-        print(message['payload'])
-    else:
-        print(message)
+    print(message)
 
+
+# Hooking 할 어플리케이션의 package명
+PACKAGE_NAME = "합성검 던지기"
 
 jscode = """
-setImmediate(function() {
-    Java.perform(function() {
-        var Activity = Java.use("android.app.Activity");
-        Activity.onResume.implementation = function() {
-            send("[*] onResume got called!");
-            this.onResume();
-        }
-    })
-})
+console.log("[+] Start Script");
+
 """
 
-process = frida.get_usb_device(timeout=10).attach(6343)
+process = frida.get_usb_device(timeout=10).attach(PACKAGE_NAME)
 script = process.create_script(jscode)
 script.on('message', on_message)
+print('[+] Running Hook attach')
 script.load()
 sys.stdin.read()

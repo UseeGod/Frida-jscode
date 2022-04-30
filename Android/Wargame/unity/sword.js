@@ -14,7 +14,7 @@ var il2cpp = null;
 Java.perform(function () {
     awaitForCondition(function (base) {
         il2cpp = ptr(base);
-        //BrickGetCoin(); //44902 line (코인 획득 설정)
+        BrickGetCoin(); //44902 line (코인 획득 설정)
         //BallUpgrade(); //231477 line (검 강화 설정);
         //SkillValue(); // (스킬 속도 변경)
         //BallBase(); /// 229067 line (게임 중 칼 공격력 설정)
