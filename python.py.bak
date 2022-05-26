@@ -7,7 +7,7 @@ def on_message(message, data):
 
 
 # Hooking 할 어플리케이션의 package명
-PACKAGE_NAME = "던지기"
+PACKAGE_NAME = "합성검 던지기"
 
 jscode = """
 console.log("[+] Start Script");
